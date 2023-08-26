@@ -60,7 +60,7 @@ class Graph:
                     bfs_list.append(node)
             for node in current_values:
                 for entry_node in node.outbound:
-                    if entry_node.value not in bfs_list:
+                    if entry_node not in bfs_list:
                         temp.append(entry_node)
             current_values = temp
 
