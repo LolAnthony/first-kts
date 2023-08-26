@@ -28,7 +28,40 @@ class Graph:
         self._root = root
 
     def dfs(self) -> list[Node]:
-        raise NotImplementedError
+        current = self._root
+        dfs_list = []
+        flag = flag_local = True
+        while flag:
+            if current not in dfs_list:
+                dfs_list.append(current)
+            while flag_local:
+                flag_local = False
+                for node in current.outbound:
+                    if node not in dfs_list:
+                        dfs_list.append(node)
+                        current = node
+                        flag_local = True
+                        break
+            if current == self._root:
+                flag = False
+            else:
+                current = current.inbound[0]
+                flag_local = True
+
+        return dfs_list
 
     def bfs(self) -> list[Node]:
-        raise NotImplementedError
+        current_values = [self._root]
+        bfs_list = []
+        while current_values:
+            temp = []
+            for node in current_values:
+                if node not in bfs_list:
+                    bfs_list.append(node)
+            for node in current_values:
+                for entry_node in node.outbound:
+                    if entry_node.value not in bfs_list:
+                        temp.append(entry_node)
+            current_values = temp
+
+        return bfs_list
