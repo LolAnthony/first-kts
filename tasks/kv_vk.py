@@ -35,4 +35,3 @@ def flip_kv_vk_safe(d: dict[KT, KV]) -> dict[KV, list[KT]]:
     for i in d.keys():
         new_d[d[i]].append(i)
     return new_d
-
